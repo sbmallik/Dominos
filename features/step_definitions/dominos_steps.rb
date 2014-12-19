@@ -1,44 +1,72 @@
 When(/^I visit the Dominos home page$/) do
-  visit('https://order.dominos.com/')
-#  visit('http://www.usatoday.com/') #  pending # express the regexp above with the code you wish you had
+  visit('https://order.dominos.com/en/')
 end
 
-Then(/^I should see the Dominos home page$/) do
+Given(/^I am on the Dominos Home page$/) do
   expect(page).to have_selector(:id, 'homePage')
-#  expect(page).to have_selector(:id, 'section_home') # pending # express the regexp above with the code you wish you had
 end
 
-When(/^I click the "(.*?)" tab$/) do |tab|
-  click_link('Locations')
+When(/^I click the "(.*?)" tab$/) do |link|
+  click_link(link, :match => :first)
 end
 
-Then(/^I should see the Dominos Location Search page$/) do
-  sleep(5)
-  expect(page).to have_selector(:id, 'locationsSearchPage')
+#Then(/^I should see the Dominos Location Search page$/) do
+#  sleep(3)
+#  expect(page).to have_selector(:id, 'locationsSearchPage')
+#end
+
+When(/^I click the "(.*?)" radio button$/) do |orderType|
+  find('.' + orderType).click
+#  click_button(orderType)
 end
 
-When(/^I enter the Street name$/) do 
-  fill_in('Street', :with => '21208 Virginia Pine Terrace')
+When(/^I select the "(.*?)" as "(.*?)"$/) do |arg1, arg2|
+  select(arg2, :from => arg1)
 end
 
-When(/^I enter the City name$/) do
-  fill_in('City', :with => 'Germantown')
+When(/^I enter the "(.*?)" as "(.*?)"$/) do |arg1, arg2| 
+  fill_in(arg1, :with => arg2)
 end
 
-When(/^I select the State name$/) do
-  select('MD', :from => 'State')
+When(/^I click the "(.*?)" button$/) do |btnName|
+#  find('.btn--large').click
+  click_button(btnName)
 end
 
-When(/^I enter the Zip Code$/) do
-  fill_in('Zip', :with => '21208')
+Then(/^I should see the "(.*?)" page$/) do |pageName|
+  sleep(3)
+  case pageName
+  when 'Home'
+    tempvar = 'homePage'
+  when 'Specialty Pizza'
+    tempvar = 'categoryPage2'
+  when 'Entrees'
+    tempvar = 'entreesPage'
+  when 'Locations Search'
+    tempvar = 'locationsSearchPage'
+  when 'Locations Results'
+    tempvar = 'locationsResultsPage'
+  end
+  expect(page).to have_selector(:id, tempvar)
 end
 
-When(/^I click the Search Locations button$/) do
-  find('.btn--large').click
+#When(/^I click the First occurrence of Order Carryout Pickup button$/) do
+#  first('.js-orderCarryoutNow').click
+#end
+
+#Then(/^I should see the Entrees page$/) do
+#  expect(page).to have_selector(:id, 'entreesPage')
+#end
+
+#Then(/^I should see the Specialty Pizza page$/) do
+#  expect(page).to have_selector(:id, 'categoryPage2')
+#end
+
+Then(/^I should see the "(.*?)" builder page$/) do |pizzaName|
+  expect(page).to have_selector('h2', pizzaName)
 end
 
-Then(/^I should see the Dominos Location Results page$/) do
-  sleep(5)
-  expect(page).to have_selector(:id, 'locationsResultsPage')
+Then(/^I should see the "(.*?)" pizza ordered$/) do |pizzaName|
+  sleep(3)
+  expect(page).to have_selector('a', pizzaName)
 end
-
