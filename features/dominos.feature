@@ -6,7 +6,7 @@ Background:
   Given I visit the Dominos home page
   Then I should see the "Home" page 
 
-@SetLocation @SpinachFeta 
+@SetLocation @SpinachFeta @Tuscany
 Scenario: Location serach for Dominos pizza
   When I click the "Locations" tab
   Then I should see the "Locations Search" page
@@ -19,8 +19,8 @@ Scenario: Location serach for Dominos pizza
     And I enter the "Zip" as "20876"
     And I click the "Continue" button
   Then I should see the "Locations Results" page
-#  When I click the "Order Carryout / Pickup" tab
-  When I click the "Future Carryout Order" tab
+  When I click the "Order Carryout / Pickup" tab
+#  When I click the "Future Carryout Order" tab
   Then I should see the "Entrees" page
 
 @SpinachFeta
@@ -34,3 +34,15 @@ Scenario: Add a pizza to the shopping cart
   When I click the "Add to Order" button
   Then I should see the "Specialty Pizza" page 
     And I should see the "Spinach & Feta" pizza ordered
+
+@Tuscany
+Scenario: Add a pizza to the shopping cart
+  When I click the "Order Online" tab
+  Then I should see the "Entrees" page
+  When I click the "Specialty Pizza" tab
+  Then I should see the "Specialty Pizza" page
+  When I click the "Tuscan Salami & Roasted Veggie" tab
+  Then I should see the "Tuscan Salami & Roasted Veggie" builder page
+  When I click the "Add to Order" button
+  Then I should see the "Specialty Pizza" page
+    And I should see the "Tuscan Salami & Roasted Veggie" pizza ordered

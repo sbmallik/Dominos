@@ -71,6 +71,7 @@ end
 #end
 
 Then(/^I should see the "(.*?)" builder page$/) do |pizzaName|
+  sleep(2)
   expect(page).to have_selector('h2', pizzaName)
 end
 
