@@ -1,10 +1,17 @@
-When(/^I visit the Dominos home page$/) do
+Given(/^I visit the Dominos home page$/) do
   visit('https://order.dominos.com/en/')
 end
 
-Given(/^I am on the Dominos Home page$/) do
-  expect(page).to have_selector(:id, 'homePage')
-end
+#Given(/^I am on the Dominos Home page$/) do
+#  expect(page).to have_selector(:id, 'homePage')
+#end
+
+#Given(/^I am on the Entrees page$/) do
+#  visit('https://order.dominos.com/en/')
+#  click_link('Order Online')
+#  sleep(3)
+#  expect(page).to have_selector(:id, 'entreesPage')
+#end
 
 When(/^I click the "(.*?)" tab$/) do |link|
   click_link(link, :match => :first)
@@ -34,7 +41,7 @@ When(/^I click the "(.*?)" button$/) do |btnName|
 end
 
 Then(/^I should see the "(.*?)" page$/) do |pageName|
-  sleep(3)
+  sleep(1)
   case pageName
   when 'Home'
     tempvar = 'homePage'
@@ -43,6 +50,7 @@ Then(/^I should see the "(.*?)" page$/) do |pageName|
   when 'Entrees'
     tempvar = 'entreesPage'
   when 'Locations Search'
+    sleep(10)
     tempvar = 'locationsSearchPage'
   when 'Locations Results'
     tempvar = 'locationsResultsPage'
@@ -67,6 +75,6 @@ Then(/^I should see the "(.*?)" builder page$/) do |pizzaName|
 end
 
 Then(/^I should see the "(.*?)" pizza ordered$/) do |pizzaName|
-  sleep(3)
+  sleep(2)
   expect(page).to have_selector('a', pizzaName)
 end

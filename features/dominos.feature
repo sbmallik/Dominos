@@ -1,12 +1,13 @@
+@OrderPizza
 Feature: Order Dominos Pizza Online
   We want to step through a simple scenario for training
- 
-#Scenario: Check the Dominos home page
-#  When I visit the Dominos home page
-#  Then I should see the "Home" page
- 
-Scenario: Location serach for Dominos pizza
+
+Background: 
   Given I visit the Dominos home page
+  Then I should see the "Home" page 
+
+@SetLocation @SpinachFeta 
+Scenario: Location serach for Dominos pizza
   When I click the "Locations" tab
   Then I should see the "Locations Search" page
   When I click the "Carryout" radio button
@@ -18,7 +19,13 @@ Scenario: Location serach for Dominos pizza
     And I enter the "Zip" as "20876"
     And I click the "Continue" button
   Then I should see the "Locations Results" page
-  When I click the "Order Carryout / Pickup" tab
+#  When I click the "Order Carryout / Pickup" tab
+  When I click the "Future Carryout Order" tab
+  Then I should see the "Entrees" page
+
+@SpinachFeta
+Scenario: Add a pizza to the shopping cart
+  When I click the "Order Online" tab
   Then I should see the "Entrees" page
   When I click the "Specialty Pizza" tab
   Then I should see the "Specialty Pizza" page
