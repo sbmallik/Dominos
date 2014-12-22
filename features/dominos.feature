@@ -46,3 +46,15 @@ Scenario: Add a pizza to the shopping cart
   When I click the "Add to Order" button
   Then I should see the "Specialty Pizza" page
     And I should see the "Tuscan Salami & Roasted Veggie" pizza ordered
+
+@Checkout
+Scenario: Checkout the items
+  When I click the "Order Online" tab
+  Then I should see the "Entrees" page
+  When I click the "Checkout" button
+  Then I should see the "Checkout" page
+  When I click the "Continue Checkout" tab
+  Then I should see the "Donation" page
+  When I click the "Yes, Add to Order" tab
+  Then I should see the "Payment" page
+  

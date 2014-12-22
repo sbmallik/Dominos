@@ -36,8 +36,14 @@ When(/^I enter the "(.*?)" as "(.*?)"$/) do |arg1, arg2|
 end
 
 When(/^I click the "(.*?)" button$/) do |btnName|
-#  find('.btn--large').click
-  click_button(btnName)
+case btnName
+  when 'Checkout'
+    tempvar2 = '.btn--checkout'
+    find(tempvar2).click
+  else
+#    find('.btn--large').click
+    click_button(btnName)
+  end
 end
 
 Then(/^I should see the "(.*?)" page$/) do |pageName|
@@ -50,10 +56,16 @@ Then(/^I should see the "(.*?)" page$/) do |pageName|
   when 'Entrees'
     tempvar = 'entreesPage'
   when 'Locations Search'
-    sleep(10)
+    sleep(2)
     tempvar = 'locationsSearchPage'
   when 'Locations Results'
     tempvar = 'locationsResultsPage'
+  when 'Checkout'
+    tempvar = 'orderCheckoutPage'
+  when 'Donation'
+    tempvar = 'genericOverlay'
+  when 'Payment'
+    tempvar = 'orderPaymentPage'
   end
   expect(page).to have_selector(:id, tempvar)
 end
@@ -71,11 +83,11 @@ end
 #end
 
 Then(/^I should see the "(.*?)" builder page$/) do |pizzaName|
-  sleep(2)
+  sleep(1)
   expect(page).to have_selector('h2', pizzaName)
 end
 
 Then(/^I should see the "(.*?)" pizza ordered$/) do |pizzaName|
-  sleep(2)
+  sleep(1)
   expect(page).to have_selector('a', pizzaName)
 end
