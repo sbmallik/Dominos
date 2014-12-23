@@ -23,29 +23,26 @@ Scenario: Location serach for Dominos pizza
 #  When I click the "Future Carryout Order" tab
   Then I should see the "Entrees" page
 
-@SpinachFeta
-Scenario: Add a pizza to the shopping cart
+Scenario Outline: Add a pizza to the shopping cart
   When I click the "Order Online" tab
   Then I should see the "Entrees" page
   When I click the "Specialty Pizza" tab
   Then I should see the "Specialty Pizza" page
-  When I click the "Spinach & Feta" tab
-  Then I should see the "Spinach & Feta" builder page
+  When I click the "<pizzaName>" tab
+  Then I should see the "<pizzaName>" builder page
   When I click the "Add to Order" button
   Then I should see the "Specialty Pizza" page 
-    And I should see the "Spinach & Feta" pizza ordered
+    And I should see the "<pizzaName>" pizza ordered
+
+@SpinachFeta
+Examples:
+| pizzaName |
+| Spinach & Feta |
 
 @Tuscany
-Scenario: Add a pizza to the shopping cart
-  When I click the "Order Online" tab
-  Then I should see the "Entrees" page
-  When I click the "Specialty Pizza" tab
-  Then I should see the "Specialty Pizza" page
-  When I click the "Tuscan Salami & Roasted Veggie" tab
-  Then I should see the "Tuscan Salami & Roasted Veggie" builder page
-  When I click the "Add to Order" button
-  Then I should see the "Specialty Pizza" page
-    And I should see the "Tuscan Salami & Roasted Veggie" pizza ordered
+Examples:
+| pizzaName |
+| Tuscan Salami & Roasted Veggie |
 
 @Checkout
 Scenario: Checkout the items
