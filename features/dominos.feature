@@ -6,17 +6,23 @@ Background:
   Given I visit the Dominos home page
   Then I should see the "Home" page 
 
-@SetLocation @SpinachFeta @Tuscany
+@SetLocation @SpinachFeta @Tuscany @SausagePepper
 Scenario: Location serach for Dominos pizza
   When I click the "Locations" tab
   Then I should see the "Locations Search" page
   When I click the "Carryout" radio button
-    And I select the "Address Type" as "House"
-#  When I select the Address Type as "House"
-    And I enter the "Street" as "21208 Virginia Pine Terrace"
-    And I enter the "City" as "Germantown"
-    And I select the "State" as "MD"
-    And I enter the "Zip" as "20876"
+    And I enter the address as: 
+| select | Address Type | House                       |
+| enter  | Street       | 21208 Virginia Pine Terrace |
+| enter  | City         | Germantown                  |
+| select | State        | MD                          |
+| enter  | Zip          | 20876                       |
+#    And I "select" the "Address Type" as "House"
+#    And I "enter" the "Street" as "21208 Virginia Pine Terrace"
+#    And I "enter" the "City" as "Germantown"
+#    And I "select" the "State" as "MD"
+#    And I "enter" the "Zip" as "20876"
+#    And I click the "Search Locations" button
     And I click the "Continue" button
   Then I should see the "Locations Results" page
   When I click the "Order Carryout / Pickup" tab
@@ -30,7 +36,7 @@ Scenario Outline: Add a pizza to the shopping cart
   Then I should see the "Specialty Pizza" page
   When I click the "<pizzaName>" tab
   Then I should see the "<pizzaName>" builder page
-  When I click the "Add to Order" button
+    And I click the "Add to Order" button
   Then I should see the "Specialty Pizza" page 
     And I should see the "<pizzaName>" pizza ordered
 
@@ -43,6 +49,11 @@ Examples:
 Examples:
 | pizzaName |
 | Tuscan Salami & Roasted Veggie |
+
+@SausagePepper
+Examples:
+| pizzaName |
+| Italian Sausage & Pepper Trio |
 
 @Checkout
 Scenario: Checkout the items
