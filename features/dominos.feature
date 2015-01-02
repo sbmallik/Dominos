@@ -36,24 +36,25 @@ Scenario Outline: Add a pizza to the shopping cart
   Then I should see the "Specialty Pizza" page
   When I click the "<pizzaName>" tab
   Then I should see the "<pizzaName>" builder page
+  When I add "<option>" to the pizza
     And I click the "Add to Order" button
   Then I should see the "Specialty Pizza" page 
     And I should see the "<pizzaName>" pizza ordered
 
 @SpinachFeta
 Examples:
-| pizzaName |
-| Spinach & Feta |
+| pizzaName | option |
+| Spinach & Feta | Extra Onion |
 
 @Tuscany
 Examples:
-| pizzaName |
-| Tuscan Salami & Roasted Veggie |
+| pizzaName | option |
+| Tuscan Salami & Roasted Veggie | Extra Pepper |
 
 @SausagePepper
 Examples:
-| pizzaName |
-| Italian Sausage & Pepper Trio |
+| pizzaName | option |
+| Italian Sausage & Pepper Trio | Extra Sausage |
 
 @Checkout
 Scenario: Checkout the items
