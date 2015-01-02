@@ -17,12 +17,6 @@ Scenario: Location serach for Dominos pizza
 | enter  | City         | Germantown                  |
 | select | State        | MD                          |
 | enter  | Zip          | 20876                       |
-#    And I "select" the "Address Type" as "House"
-#    And I "enter" the "Street" as "21208 Virginia Pine Terrace"
-#    And I "enter" the "City" as "Germantown"
-#    And I "select" the "State" as "MD"
-#    And I "enter" the "Zip" as "20876"
-#    And I click the "Search Locations" button
     And I click the "Continue" button
   Then I should see the "Locations Results" page
   When I click the "Order Carryout / Pickup" tab
