@@ -6,7 +6,7 @@ Background:
   Given I visit the Dominos home page
   Then I should see the "Home" page 
 
-@SetLocation @SpinachFeta @Tuscany @SausagePepper
+@SetLocation
 Scenario: Location serach for Dominos pizza
   When I click the "Locations" tab
   Then I should see the "Locations Search" page
@@ -50,6 +50,26 @@ Examples:
 | pizzaName | option |
 | Italian Sausage & Pepper Trio | Extra Sausage |
 
+@Custom1
+Scenario: Order the first custom pizza
+  When I click the "Order Online" tab
+  Then I should see the "Entrees" page
+  When I click the "Build Your Own Pizza" tab
+  Then I should see the "Build Your Own Pizza" page
+  When I add "X-Large (16") Brooklyn Pizza" to the pizza
+  When I click the "Next Step" tab
+  Then I should see the "Choose Cheese & Sauce" page
+  When I add "Extra Cheese" to the pizza
+    And I add "White Sauce" to the pizza
+    And I click the "Next Step" tab
+  Then I should see the "Choose Toppings" page
+  When I check "Italian Sausage" to the pizza
+    And I check "Mushrooms" to the pizza
+    And I click the "Add to Order" button
+    And I click the "No Thanks" button
+  Then I should see the "Entrees" page
+    And I should see the "X-Large (16") Brooklyn Pizza" pizza ordered
+
 @Checkout
 Scenario: Checkout the items
   When I click the "Order Online" tab
@@ -60,4 +80,4 @@ Scenario: Checkout the items
   Then I should see the "Donation" page
   When I click the "Yes, Add to Order" tab
   Then I should see the "Payment" page
-  
+
